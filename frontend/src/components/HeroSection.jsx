@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 import { ArrowRight } from "lucide-react";
-
+import heroimg from '../assets/images/heroimage.png'
 export default function HeroSection() {
   return (
     <section className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-20 py-16 bg-gradient-to-br from-green-100 via-white to-blue-100">
@@ -31,7 +31,7 @@ export default function HeroSection() {
         className="w-full md:w-1/2 mb-10 md:mb-0"
       >
         <img
-          src="https://img.freepik.com/free-vector/people-recycling-concept_23-2148511579.jpg?semt=ais_hybrid&w=740"
+          src={heroimg}
           alt="SmartWaste Reporting Illustration"
           className="w-full h-auto object-contain drop-shadow-xl"
         />

@@ -69,7 +69,7 @@ const Navbar = () => {
             
             <li>
               <NavLink
-                to="/contact"
+                to="/login"
                 className={({ isActive }) =>
                   `block py-2 px-3 rounded-sm md:p-0 ${
                     isActive
@@ -84,7 +84,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/contact"
+                to="/register"
                 className={({ isActive }) =>
                   `block py-2 px-3 rounded-sm md:p-0 ${
                     isActive
