@@ -1,6 +1,6 @@
 # ♻️ TrashCash
 
-**TrashCash** is an innovative web application developed for **HackByte 3.0 Hackathon 2024** by Team **Code Craft** from **AKS University, Satna, Madhya Pradesh**. It incentivizes individuals to recycle household waste like plastic, paper, and metal by rewarding them with points, cash, or discounts—promoting a cleaner, greener, and more sustainable environment.
+**TrashCash** is an innovative web application developed for **HackByte 3.0 Hackathon 2024** by Team **CodeCraft** from **AKS University, Satna, Madhya Pradesh**. It incentivizes individuals to recycle household waste like plastic, paper, and metal by rewarding them with points. Also  allowing citizens to upload images of waste or trash on there locallity ,  along with location . TrashCash helps track  and clean them as fast as possible .And by providing information related to waste or track  citizens  get  rewards . TrashCash promoting a cleaner, greener, and more sustainable environment.
 
 ---
 
