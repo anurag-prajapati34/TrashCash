@@ -2,7 +2,23 @@
 exports.reportTrashController = async (req, res) => {
     
   console.log("req body:", req.body);
-  const { name , imageUrl, address, description ,city,state,zip} = req.body;
+  const { name,
+    imageUrl,
+    address,
+    description,
+    city,
+    state,
+    zip} = req.body;
+
+    console.log("req body:", req.body);
+  console.log("req files:", req.files);
+  console.log(name,
+    imageUrl,
+    address,
+    description,
+    city,
+    state,
+    zip)
 
   //upload image to cloudinary
 

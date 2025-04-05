@@ -6,6 +6,9 @@ import './index.css'
 import HeroSection from './components/HeroSection'
 import {Homepage} from './pages/Homepage'
 import Navbar from './components/Navbar'
+import { Toaster } from 'react-hot-toast'
+import { Outlet } from 'react-router-dom'
+import Footer from './components/Footer'
 
 
 function App() {
@@ -15,9 +18,10 @@ function App() {
     <>
 
       <Navbar/>
-      <HeroSection/>
-   <Homepage/>
-
+      
+   <Outlet/>
+   <Toaster/>
+{/* <Footer/> */}
     </>
   )
 }
