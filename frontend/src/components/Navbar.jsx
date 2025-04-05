@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Link, NavLink} from 'react-router-dom'
+import { FirebaseAuthContext } from '../contexts/FirebaseAuthContext'
 const Navbar = () => {
+
+  const {logedInUser,logOut}=useContext(FirebaseAuthContext);
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -67,36 +70,29 @@ const Navbar = () => {
               </NavLink>
             </li>
             
-            <li>
-              <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  `block py-2 px-3 rounded-sm md:p-0 ${
-                    isActive
-                      ? 'text-green-700 bg-green-100 md:bg-transparent md:text-green-700 dark:text-green-500'
-                      : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white'
-                  }`
-                }
-              >
-                Login
-              </NavLink>
+            
 
-            </li>
-            <li>
-              <NavLink
-                to="/register"
-                className={({ isActive }) =>
-                  `block py-2 px-3 rounded-sm md:p-0 ${
-                    isActive
-                      ? 'text-green-700 bg-green-100 md:bg-transparent md:text-green-700 dark:text-green-500'
-                      : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white'
-                  }`
-                }
-              >
-                Register
-              </NavLink>
+            {
+          logedInUser?<li>
+        <button onClick={()=>logOut()} className='text-red-800'>Logout</button>
 
-            </li>
+        </li>:<li>
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              `block py-2 px-3 rounded-sm md:p-0 ${
+                isActive
+                  ? 'text-green-700 bg-green-100 md:bg-transparent md:text-green-700 dark:text-green-500'
+                  : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white'
+              }`
+            }
+          >
+            Login
+          </NavLink>
+
+        </li>
+        }
+           
 
           </ul>
           

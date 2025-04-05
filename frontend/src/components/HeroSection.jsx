@@ -18,8 +18,8 @@ export default function HeroSection() {
         <p className="mt-4 text-lg text-gray-700">
           Empowering communities to report waste and keep neighborhoods clean. Snap, tag, and notify your local authorities in just a few clicks.
         </p>
-        <button className="mt-6 px-6 py-3 text-lg bg-green-700 hover:bg-green-800 text-white rounded-xl">
-          Get Started <ArrowRight className="ml-2 h-5 w-5" />
+        <button className="mt-6 px-6 py-3 text-lg bg-green-700 hover:bg-green-800 text-white rounded-xl flex items-center gap-1">
+         Explore More <ArrowRight className="ml-2 h-5 w-5 hover:scale-110 transition ease-in-out" />
         </button>
       </motion.div>
 

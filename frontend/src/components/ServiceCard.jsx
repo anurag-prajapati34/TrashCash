@@ -6,7 +6,7 @@ const ServiceCard = ({ title, description, imageUrl, actionRoute }) => {
   const navigate = useNavigate();
   return (
 
-    <div className=' w-[200px] sm:w-[300px]  text-start  bg-white rounded-lg shadow-md flex flex-col gap-4   p-4'>
+    <div className=' w-[200px] sm:w-[300px]  text-start  bg-white rounded-lg shadow-md flex flex-col gap-4   p-4 hover:scale-105 transition ease-in-out'>
 
 
       <div style={{ backgroundImage: `url(${imageUrl})`, backgroundPosition: 'center', backgroundSize: 'cover' }} className='bg-[#F2F2F2] w-full sm:h-[250px] h-[200px] flex flex-col gap-4 items-center justify-center p-4 rounded-lg shadow-md'>

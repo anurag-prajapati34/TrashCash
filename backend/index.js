@@ -7,6 +7,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const trashRoutes = require("./routes/trashRoutes");
+const userRoutes=require('./routes/userRoutes')
 
 dotenv.config();
 
@@ -29,7 +30,8 @@ mongoose
 
 // Routes
 app.use("/api/trash", trashRoutes);
-// app.use("/api/pickup", pickupRoutes);
+app.use("/api/user",userRoutes)
+
 
 app.get("/", (req, res) => {
   res.send("SmartWaste API Running...");

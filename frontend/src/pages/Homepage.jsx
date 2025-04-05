@@ -40,7 +40,7 @@ export const Homepage = () => {
       , actionRoute: "/schedule-pickup"
     },
     {
-      title: "Connect With Likeminded People",
+      title: "Community driven approach",
       description: "Connect with others who care about the environment.",
       
       imageUrl: communityCleaning
