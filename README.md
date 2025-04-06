@@ -30,63 +30,12 @@ TrashCash simplifies the process of waste segregation and recycling by offering:
 - **Functionality**: Image upload, location input, user dashboard
 
 ### 🔧 Backend
-- **Framework**: Node.js / Express.js (or optionally Django/Flask)
-- **APIs**: 
-  - Google Vision API / Vertex AI (image recognition)
-  - Google Maps / Leaflet.js (map integrations)
-- **Database**: MongoDB
-- **Storage**: Firebase (for image storage)
-
-### 🛠️ Admin / Municipality Panel
-- Google Maps for tracking
-- Operations managed via backend services (Express.js)
+- **Framework**: Node.js / Express.js 
+- **Database & storage**: MongoDB , Cloudinary
+- 
 
 ---
 
-## 💸 Revenue Model
-
-1. **Doorstep Pickup Charges** – Small fee for home waste pickups.
-2. **Waste Sales** – Selling collected waste to recycling companies or startups.
-3. **Future Plans**:
-   - **Product Manufacturing** from recycled waste.
-   - **Dumpyard Management** to prevent toxic leachate and ground water pollution.
-
----
-
-## ✅ Feasibility & Viability
-
-### 🔍 Challenges
-- User behavior change & adoption
-- Logistics and timely pickups
-- AI misclassification
-- City-level scalability
-- Regulatory compliance
-
-### ✔️ Mitigation Strategies
-- Awareness campaigns & influencer marketing
-- AI-based route optimization
-- Manual waste classification verification
-- Pilot rollouts in select cities
-- Partnerships with municipal & recycling bodies
-
----
-
-## 🌍 Impact & Benefits
-
-### 🌱 Environmental
-- Reduces landfill and pollution
-- Promotes circular economy
-
-### 💰 Economic
-- Generates earning opportunities
-- Supports local recycling businesses
-- Cuts municipal waste costs
-
-### 🏙️ Social
-- Increases awareness & civic participation
-- Enhances urban cleanliness
-
----
 
 ## 👨‍💻 Team Code Craft
 
@@ -95,16 +44,24 @@ TrashCash simplifies the process of waste segregation and recycling by offering:
 - **Yash Yadav**
 
 ---
+## Installation
 
-## 📍 Institution
-
-**AKS University, Satna, Madhya Pradesh**
-
----
-
-## 📦 License
-
-This project is intended for educational and hackathon purposes.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/anurag-prajapati34/TrashCash.git
+   cd Frontend or Backend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure environment variables:
+   - Create a `.env` file in the root directory.
+   - Add your Firebase and MongoDB connection details.
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
 ---
 
