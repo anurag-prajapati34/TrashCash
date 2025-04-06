@@ -31,7 +31,7 @@ mongoose
 // Routes
 app.use("/api/trash", trashRoutes);
 app.use("/api/user",userRoutes)
-
+app.use("/api/trash/reports",trashRoutes);
 
 app.get("/", (req, res) => {
   res.send("SmartWaste API Running...");

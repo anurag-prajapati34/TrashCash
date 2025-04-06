@@ -60,11 +60,18 @@ export default function DropPointspage() {
       </p>
 
       {/* Map Placeholder */}
-      <div className="bg-gray-200 h-40 mb-4 flex items-center justify-center">
-        <p className="text-gray-500">Interactive map will be displayed here</p>
+      <div className="bg-gray-200 h-80 mb-4 flex items-center justify-center relative overflow-hidden rounded-lg">
+        <iframe
+          title="Google Maps"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11586.100591604843!2d80.02906634067077!3d23.17617097992759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3981a94397365dd3%3A0x5f9aeb812c2678c9!2sIIITDM%20Jabalpur!5e0!3m2!1sen!2sin!4v1743899133764!5m2!1sen!2sin"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen={true}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
-
-      {/* Search and Filter */}
       <div className="flex space-x-2 mb-4">
         <input
           type="text"
@@ -88,8 +95,6 @@ export default function DropPointspage() {
         </select>
         <button className="bg-black text-white px-4 py-2 rounded">Search</button>
       </div>
-
-      {/* Location Cards */}
       <div className="flex flex-col gap-5">
         {filteredLocations.map((location, index) => (
           <div key={index} className="bg-white shadow-md flex gap-5" >

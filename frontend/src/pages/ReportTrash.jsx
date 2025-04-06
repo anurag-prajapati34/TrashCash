@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaUpload, FaMapMarkerAlt } from "react-icons/fa";
-import { ImageInput } from "../components/ImageInput/ImageInput";
+
+import { toast } from "react-toastify";
+
+import AllUserReports from "./AllUserReports";
+import { FirebaseAuthContext } from "../contexts/FirebaseAuthContext";
 
 const ReportTrash = () => {
-  const [image, setImage] = useState(null);
-  const [location, setLocation] = useState({ lat: "", lng: "" });
-  const [description, setDescription] = useState("");
-  const [formData, setFormData] = useState({ name: "", address: "", city: "", state: "", zip: "" });
 
-  const handleImageUpload = (e) => {
-    setImage(e.target.files[0]);
-  };
+  const [location, setLocation] = useState({ lat: "", lng: "" });
+  const [selectedImage, setSelectedImage] = useState('')
+  const [trashReportData, setTrashReportData] = useState({
+    name: "", address: "", description: "", city: "", state: "", zip: ""
+  })
+  const { logedInUser } = useContext(FirebaseAuthContext);
+
+
+  const handleImageChange = (e) => {
+    const image = e.target.files[0]
+    console.log("image :", image)
+    setSelectedImage(image)
+  }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setTrashReportData((prev) => ({ ...prev, [name]: value }))
+    console.log("trashReportData :", trashReportData)
+  }
+
 
   const fetchLocation = () => {
     if (navigator.geolocation) {
@@ -28,14 +44,65 @@ const ReportTrash = () => {
     setLocation((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFormDataChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+
+
+  const handleTrashReportSubmission = () => {
+
+    const { name, address, description, city, state, zip } = trashReportData
+    if (name || selectedImage || address || description || city || state || zip) {
+
+
+      const formData = new FormData()
+      formData.append('trashimage', selectedImage)
+      formData.append('name', name)
+      formData.append('latitude', location.lat)
+      formData.append('longitude', location.lng)
+      formData.append('address', address)
+      formData.append('description', description)
+      formData.append('city', city)
+      formData.append('state', state)
+      formData.append('zip', zip)
+      formData.append("userAuthId", logedInUser.uid);
+      console.log("formData :", formData)
+
+
+      // Make an API call to upload the image
+      fetch(`${import.meta.env.VITE_SERVER_URL}/api/trash/report`, {
+        method: 'POST',
+
+        body: formData,
+      })
+        .then((response) => {
+
+          if (response.ok) {
+            toast.success("Trash reported successfully")
+          }
+
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          toast.error("Error reporting trash")
+        });
+    } else {
+
+      toast.error("Please fill all the fields");
+
+    }
+
+
+
+  }
+
+
+
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Trash Report Submitted", { image, location, description, ...formData });
+
+    handleTrashReportSubmission();
   };
 
   return (
@@ -49,8 +116,19 @@ const ReportTrash = () => {
         <div className="space-y-6">
           <div className="flex flex-col items-center">
             <label className="block text-lg font-medium mb-2">Upload Trash Image</label>
-            {/* <input type="file" onChange={handleImageUpload} className="w-full" required /> */}
-            <ImageInput/>
+
+            <div id='thumbaniImage' className='w-full h-[150px] rounded-xl bg-[var(--secondary-color)] flex justify-center items-center  text-xl text-[rgba(0,0,0,0.6)] cursor-pointer relative border-[var(--primary-color)] border-2'>
+              <input name={'imageUrl'} onChange={ handleImageChange 
+              } className='absolute h-full w-full opacity-0 z-40' type='file' />
+
+
+
+              {
+                selectedImage ? <img className='h-full' src={URL.createObjectURL(selectedImage)} /> : <i className="fa-regular fa-images  text-[rgba(0,0,0,0.5)]"></i>
+              }
+
+            </div>
+
           </div>
 
           <div>
@@ -58,8 +136,9 @@ const ReportTrash = () => {
             <textarea
               className="w-full border border-gray-300 p-3 rounded-lg"
               placeholder="Describe the trash or its location..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+
+              onChange={handleInputChange}
+              name="description"
               rows={4}
               required
             ></textarea>
@@ -97,8 +176,8 @@ const ReportTrash = () => {
             <input
               type="text"
               name="name"
-              value={formData.name}
-              onChange={handleFormDataChange}
+              value={trashReportData.name}
+              onChange={handleInputChange}
               placeholder="Full Name"
               className="border border-gray-300 p-2 rounded col-span-2"
               required
@@ -106,8 +185,8 @@ const ReportTrash = () => {
             <input
               type="text"
               name="address"
-              value={formData.address}
-              onChange={handleFormDataChange}
+              value={trashReportData.address}
+              onChange={handleInputChange}
               placeholder="Address"
               className="border border-gray-300 p-2 rounded col-span-2"
               required
@@ -115,8 +194,8 @@ const ReportTrash = () => {
             <input
               type="text"
               name="city"
-              value={formData.city}
-              onChange={handleFormDataChange}
+              value={trashReportData.city}
+              onChange={handleInputChange}
               placeholder="City"
               className="border border-gray-300 p-2 rounded"
               required
@@ -124,8 +203,8 @@ const ReportTrash = () => {
             <input
               type="text"
               name="state"
-              value={formData.state}
-              onChange={handleFormDataChange}
+              value={trashReportData.state}
+              onChange={handleInputChange}
               placeholder="State"
               className="border border-gray-300 p-2 rounded"
               required
@@ -133,8 +212,8 @@ const ReportTrash = () => {
             <input
               type="text"
               name="zip"
-              value={formData.zip}
-              onChange={handleFormDataChange}
+              value={trashReportData.zip}
+              onChange={handleInputChange}
               placeholder="Zip Code"
               className="border border-gray-300 p-2 rounded"
               required
@@ -143,6 +222,7 @@ const ReportTrash = () => {
 
           <div className="text-center">
             <button
+              onClick={handleSubmit}
               type="submit"
               className="bg-green-600 text-white px-6 py-2 rounded-full font-medium hover:bg-green-700 transition"
             >
@@ -151,6 +231,8 @@ const ReportTrash = () => {
           </div>
         </div>
       </div>
+
+      <AllUserReports />
     </div>
   );
 };

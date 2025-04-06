@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaLeaf, FaPeopleCarry, FaHandsHelping } from "react-icons/fa";
-import communityImage from '../assets/images/communityEventImage2.jpeg'
+import communityImage from "../assets/images/communityEventImage2.jpeg";
 const Community = () => {
   return (
     <div className="bg-green-50 min-h-screen p-6 font-sans">

@@ -8,27 +8,8 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    cart:[
-        {
-            product_id:{
-                type:String,
-                required:true,
-            },
-            product:{
-                type:Object,
-                required:true
-            },
-            
-            quantityToBuy:{
-                type:Number,
-                required:true
-            }
-
-
-
-        }
-    ],
-    orders:[]
+    reports:[ ],
+   
 
 })
 

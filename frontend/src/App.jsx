@@ -3,12 +3,10 @@ import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import './index.css'
 
-import HeroSection from './components/HeroSection'
-import { Homepage } from './pages/Homepage'
+
 import Navbar from './components/Navbar'
 import { Toaster } from 'react-hot-toast'
 import { Outlet, useNavigate } from 'react-router-dom'
-import Footer from './components/Footer'
 import { FirebaseAuthContext } from './contexts/FirebaseAuthContext'
 
 
@@ -23,6 +21,8 @@ function App() {
     if (!logedInUser) {
       navigate('/login')
     }
+    
+    console.log("logedInUser", logedInUser);
 
   }, [logedInUser]);
 
@@ -33,7 +33,7 @@ function App() {
 
       <Outlet />
       <Toaster />
-      {/* <Footer/> */}
+   
     </>
   )
 }

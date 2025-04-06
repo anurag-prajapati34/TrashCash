@@ -16,7 +16,7 @@ import Footer from '../components/Footer';
 import { HowItWorks } from '../components/HowItWorks';
 
 export const Homepage = () => {
-
+  
   const services = [
     {
       title: "Report Trash",

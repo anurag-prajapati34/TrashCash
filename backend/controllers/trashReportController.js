@@ -1,79 +1,61 @@
 
+const cloudinary=require("../config/cloudinary");
+const TrashReportModel = require("../models/trashReport");
+const fs = require("fs");
+
 exports.reportTrashController = async (req, res) => {
-    
-  console.log("req body:", req.body);
-  const { name,
-    imageUrl,
-    address,
-    description,
-    city,
-    state,
-    zip} = req.body;
-
-    console.log("req body:", req.body);
-  console.log("req files:", req.files);
-  console.log(name,
-    imageUrl,
-    address,
-    description,
-    city,
-    state,
-    zip)
-
-  //upload image to cloudinary
-
+  const { name, address, description, city, state, zip, latitude, longitude ,userAuthId} = req.body;
   const files = req.files;
-  console.log("file::::", req.files);
 
-  if (files) {
-    console.log("entereed to if bloack")
-    try {
-      const trashimage = req.files["trashimage"][0];
+  if (!files || !files["trashimage"]) {
+    return res.status(400).json({ error: "No image provided" });
+  }
 
-      ///geting cloudinary url for thumbnail image
-      const thumbnailImageResult = await cloudinary.uploader.upload(
-        trashimage.path,
-        {
-          folder: "TrashImages",
-        },
-        (error, result) => {
-          fs.unlinkSync(trashimage.path);
-          if (error) {
-            return res.status(500).json({ "cloudinaryErro:": error });
-          }
-        }
-      );
-      const trashImageCloudinaryUrl = trashImageCloudinaryUrl.secure_url;
+  try {
+    const trashimage = files["trashimage"][0];
 
-      ///geting cloudinary url for extraimages
+    const thumbnailImageResult = await cloudinary.uploader.upload(trashimage.path, {
+      folder: "TrashImages",
+    });
 
-      ////adding data to databse
+    fs.unlinkSync(trashimage.path); // delete local file
 
-      if (trashImageCloudinaryUrl) {
-        const result = await ProductModel.create({
-         
+    const trashImageCloudinaryUrl = thumbnailImageResult.secure_url;
 
-            name: name,
-            address: address,
-            description: description,
-            city: city,
-            state: state,
-            zip: zip,
-            imageUrl: trashImageCloudinaryUrl,
-         
-        })
-          .then((result) => {
-            return res.json({"success":"Successfully trash reported"});
-          })
-          .catch((error) => {
-            return res.json({"mongoDB error:": error});
-          });
-      }
-    } catch (error) {
-      console.log("errorr rr:",error)
-      return res.status(500).json({ Error: "Error uploading to cloudinary" });
-    }
-  } else {
-    return res.json({ Error: "File not found" });
+    console.log("Image uploaded successfully:", trashImageCloudinaryUrl);
+
+    await TrashReportModel.create({
+      userAuthId:userAuthId,
+      name,
+      address,
+      description,
+      city,
+      state,
+      zip,
+      latitude,
+      longitude,
+      imageUrl: trashImageCloudinaryUrl,
+    });
+
+    return res.status(200).json({ success: "Successfully trash reported" });
+  } catch (error) {
+    console.error("Upload error:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+exports.getTrashReports = async (req, res) => {
+  const {uid}=req.query;
+  console.log("uid ::",uid);
+  if (!uid) {
+    return res.status(400).json({ error: "User ID is required" });
+  }
+  try {
+    const reports = await TrashReportModel.find({userAuthId:uid});
+    console.log("fetche reports")
+    return res.status(200).json({"reports":reports});
+  } catch (error) {
+    console.error("Error fetching reports:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}

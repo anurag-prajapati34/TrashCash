@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const trashReportSchema = new Schema({
+  userAuthId:{
+    type:String,
+    required:true
+  },
   name:{
     type:String,
     required:true
@@ -29,6 +33,14 @@ const trashReportSchema = new Schema({
         type:String,
       default:"pending"
     },
+    longitude: {
+      type:Number
+
+    },
+   latitube:{
+    type:Number
+
+    }
 }
 , {
   timestamps: true,

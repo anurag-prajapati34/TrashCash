@@ -2,7 +2,7 @@ const multer=require('multer')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
 
-      
+      console.log("file we geting ;",file);
       
       cb(null, "uploads/"); // Folder to store images temporarily
     },
